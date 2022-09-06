@@ -8,8 +8,15 @@ class Project < ApplicationRecord
     contestants.count
   end
 
-  def self.average_contestant_experience 
-    Project.contestants.count if Project.contestants.count == 1 
+  def average_contestant_experience_calculator
+    counter = [] 
+    contestants.years_of_experience / contestant_count.to_f  if contestants.count == 1
+    if contestant_count > 1
+      contestants.each do |contestant|
+        counter << contestant.years_of_experience
+      end
+      counter.sum / contestant_count.to_f
+    end
   end
 
 end
